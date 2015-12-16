@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Iam Meditation</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+
+    <!-- <script src="lib/ngCordova/dist/ng-cordova.min.js"></script> -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>  
+    <script src="cordova.js"></script>  
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter">  
+  <ion-pane ng-controller="MeditationController">
+      <div class="bar bar-header bar-royal">
+        <h1 class="title">IAM</h1>
+      </div>
+    <ion-content padding="'true'" scroll="false" class="has-header">
+      <form class="list">
+        <div>
+          <p> <strong>Optional</strong> meditation length in minutes </p>
+        </div>
+        <ion-item class="range range-calm">
+          <input type="range" value="{{$storage.meditationLen}}" min="0" max="15" ng-model="$storage.meditationLen"><strong>{{$storage.meditationLen}}</strong>
+        </ion-item>
+      </form>
+      <button ng-disabled="!ready" class="button button-balanced button-block  icon-right ion-ios-play" ng-click="play('http://www.stephaniequinn.com/Music/Commercial%20DEMO%20-%2013.mp3')">Start</button>
+      <div class="spacer" style="height: 100px;" ></div>
+      <div class="list card">
+        <div class="item item-divider">Recent History</div>
+        <div class="item item-body">
+          <ion-list ng-repeat="event in $storage.history | limitTo:3">
+            <ion-item>{{formatDate(event.date)}}, {{event.meditationLen}} min</ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </ion-content>
+  </ion-pane>
+
+  </body>  
+</html>
